@@ -11,3 +11,23 @@
   so sxiv can support transparent thumbnails:  
   ![](preview/2015-03-01-190252_150x150_scrot.png)![](preview/2015-03-01-190035_150x150_scrot.png)
 
+### sxiv.rb
+  Ruby script for finding optimal thumbnail size.  
+  The thumbnail size is calculated so that when viewing images in
+  full screen the empty space is minimal.
+
+  The calculation uses the width and height of the display.  
+  **If you are using the bottom bar in full screen you have to
+  substract his height(by default the font size + 2px)
+  from the height of the display.**
+
+  The calculation can be done for windows too.
+  ```
+  sxiv.rb -w <window-width> -h <window-height>
+  ```
+
+  For more information:
+  ```
+  sxiv.rb --help
+  ```
+
