@@ -55,10 +55,10 @@ min = [min, 1].max
 # thumbnail margin + padding + border
 mpb = ->(n) { [(((n - 1) >> 5) + 1), 4].min * 2 + 6 }
 
-min += mpb.call(min)
-max += mpb.call(max)
-
-f = ->(n) { [(w % n) * h + (h % n) * w, n - mpb.call(n)] }
+f = ->(x) {
+  n = x + mpb.call(x)
+  [(w % n) * h + (h % n) * w, x]
+}
 
 (min .. max).map(&f).sort.first(len).each do |t|
   puts "Thumbnail size:\s#{t[1]}\tEmpty space:\s#{t[0]}"
