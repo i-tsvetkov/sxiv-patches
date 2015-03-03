@@ -42,7 +42,7 @@ end
 
 w, h = options[:width], options[:height]
 
-if w.nil? or h.nil?
+if w.nil? or h.nil? or (w < 0) or (h < 0)
   abort(parser.help)
 end
 
@@ -50,13 +50,15 @@ max = options[:maximum] || [w, h].min
 min = options[:minimum] || 60
 len = options[:length]  || 40
 
-# 2 * thumbnail margin + padding + border
-mpb = 14
+min = [min, 1].max
 
-min += mpb
-max += mpb
+# thumbnail margin + padding + border
+mpb = ->(n) { [(((n - 1) >> 5) + 1), 4].min * 2 + 6 }
 
-f = ->(n) { [(w % n) * h + (h % n) * w, n - mpb] }
+min += mpb.call(min)
+max += mpb.call(max)
+
+f = ->(n) { [(w % n) * h + (h % n) * w, n - mpb.call(n)] }
 
 (min .. max).map(&f).sort.first(len).each do |t|
   puts "Thumbnail size:\s#{t[1]}\tEmpty space:\s#{t[0]}"
