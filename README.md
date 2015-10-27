@@ -11,6 +11,9 @@
   so sxiv can support transparent thumbnails:  
   ![](preview/2015-03-01-190252_150x150_scrot.png)![](preview/2015-03-01-190035_150x150_scrot.png)
 
+### sxiv-image-mode-cycle.patch
+  adds the ability to cycle when viewing multiple images
+
 ### sxiv.rb
   Ruby script for finding optimal thumbnail size.  
   The thumbnail size is calculated so that when viewing thumbnails in
