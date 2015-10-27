@@ -1,0 +1,39 @@
+diff --git a/thumbs.c b/thumbs.c
+index 3f13af0..bbf8539 100644
+--- a/thumbs.c
++++ b/thumbs.c
+@@ -211,7 +211,7 @@ bool tns_load(tns_t *tns, int n, bool force)
+ {
+ 	int w, h;
+ 	bool cache_hit = false;
+-	float z, zw, zh;
++	float zw, zh;
+ 	thumb_t *t;
+ 	Imlib_Image im = NULL;
+ 	const fileinfo_t *file;
+@@ -307,14 +307,17 @@ bool tns_load(tns_t *tns, int n, bool force)
+ 
+ 	w = imlib_image_get_width();
+ 	h = imlib_image_get_height();
+-	zw = (float) THUMB_SIZE / (float) w;
+-	zh = (float) THUMB_SIZE / (float) h;
+-	z = MIN(zw, zh);
+-	z = MIN(z, 1.0);
+-	t->w = z * w;
+-	t->h = z * h;
+-
+-	t->im = imlib_create_cropped_scaled_image(0, 0, w, h, t->w, t->h);
++
++	t->w = THUMB_SIZE;
++	t->h = THUMB_SIZE;
++
++	int x = (w < h) ? 0 : (w - h) / 2;
++	int y = (w > h) ? 0 : (h - w) / 2;
++
++	int side = (w < h) ? w : h;
++
++	t->im = imlib_create_cropped_scaled_image(x, y, side, side, t->w, t->h);
++
+ 	if (t->im == NULL)
+ 		die("could not allocate memory");
+ 

@@ -14,6 +14,10 @@
 ### sxiv-image-mode-cycle.patch
   adds the ability to cycle when viewing multiple images
 
+### sxiv-square-thumbnails-b2dbd2f.patch
+  old version of `sxiv-square-thumbnails.patch`  
+  last working commit is `b2dbd2f`
+
 ### sxiv.rb
   Ruby script for finding optimal thumbnail size.  
   The thumbnail size is calculated so that when viewing thumbnails in
